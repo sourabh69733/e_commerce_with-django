@@ -1,0 +1,59 @@
+{% extends "base.html" %} {% load crispy_forms_tags %} {% block content %}
+<main>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $("input[name='builty_tag']").click(function () {
+            if ($("#manual").is(":checked")) {
+                $("#manual_number").removeAttr("disabled");
+                $("#manual_number").focus();
+
+            } else {
+                $("#manual_number").attr("disabled", "disabled");
+            }
+        });
+    });
+</script>
+  <body>
+    <div class="card">
+      <form method="POST" class="custom-control custom-checkbox">
+        {% csrf_token %}
+        <div class="d-block my-3"> 
+        <div class="custom-control custom-radio mr-10">
+
+          <input id="manual" name="builty_tag" value="manual" type="radio" class="custom-control-input" />
+          <label class="custom-control-label" for="manual"></label>
+          1
+        </div>
+        <div class="custom-control custom-radio mr-10">
+
+          <input id="automatic" name="builty_tag" value="automatic" type="radio" class="custom-control-input" />
+          <label class="custom-control-label" for="automatic"></label>
+          2
+        </div>
+
+        <div class="md-form mb-5">
+          <input
+            type="text"
+            placeholder=" Number"
+            id="manual_number"
+            name="manual_number"
+            disabled="disabled"
+          />
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <div class="d-block my-3"> 
+        {% for value,name in form.fields.builty_type.choices %}
+        <div class="custom-control custom-radio mr-10">
+          <input id="{{ name}}" name="payment_option" value="{{ value }}" type="radio" class="custom-control-input" required>
+          <label class="custom-control-label" for="{{ name }}">{{ name }}</label>
+        </div>
+        {% endfor %}
+        </div>
+
+      </form>
+    </div>
+  </body>
+</main>
+{% endblock content %}

@@ -1,0 +1,12 @@
+{% extends 'base.html' %} {% block content %}
+<form method="post" enctype="multipart/form-data">
+  {% csrf_token %} {{ form.as_p }}
+
+  <button type="submit" class="btn btn-primary">Upload</button>
+  {% if image_status %}
+  <a style="color: red" href="predictions_for_image/"> Predict Disease </a>
+  {% endif %}
+</form>
+
+<p><a href="/">Return to home</a></p>
+{% endblock %}
