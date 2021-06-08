@@ -11,7 +11,7 @@ from django.utils import timezone
 from .models import Item, OrderItem, Order, Address, Payment, Coupon, Refund, FirstComponentModel
 from .forms import CheckOutForm, CouponForm, RefundForm, ImageClassification
 from .address_form import FirstComponent
-from .casavara_diseases import predict_disease
+from .casavara_diseases import get_image_files
 
 import os
 # Create your views here.
@@ -50,10 +50,9 @@ def imageFile(request):
 def predict_image(request):
     directory = "media_root/documents"
     files = os.listdir(directory)
-    img_path = files[-1]
-    final_path = os.path.join(directory, img_path)
-    ans = predict_disease(final_path)
-    return render(request, 'imagePredictions.html', {'source': img_path, 'content': ans})
+    img_path = os.path.join(directory,files[-1])
+    s,c= get_image_files()
+    return render(request, 'imagePredictions.html', {'source': img_path, 'content1': s,'content2':c})
 
 
 class FirstComponentForm(View):
