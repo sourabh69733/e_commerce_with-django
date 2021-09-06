@@ -2,4 +2,4 @@ env/
 db.sqlite3
 __pycache__/
 .vscode/
-__pycache__/
+VALUE
