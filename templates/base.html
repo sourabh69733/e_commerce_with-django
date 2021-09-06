@@ -52,6 +52,7 @@
 
   <body>
     <div class="mt-5 pt-4">
+
       {% if messages %} {% for message in messages %}
       <div class="alert alert-{{ message.tags }}" role="alert">
         <button
@@ -67,8 +68,10 @@
 
       {% endfor %} {% endif %}
     </div>
-    {% block content %} {% endblock content%} {% block extra_body %} {% endblock
-    %} {% include "footer.html" %} {% include "scripts.html" %} {% block
-    extra_scripts %} {% endblock %}
+    
+
+    {% block content %} {% endblock content%} 
+     {% include "footer.html" %} {% include "scripts.html" %} 
+    {% block extra_scripts %} {% endblock %}
   </body>
 </html>

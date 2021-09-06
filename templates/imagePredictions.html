@@ -1,7 +1,22 @@
 {% extends "base.html" %} {% block content %}
-<div class="row wow fadeIn">
-  <img src="{{ source }}" alternate="plant image" />
-  <p>{{content}}</p>
+{% load static  %}
+<div >
+{% comment %} <h1>We predict diseases of cassavara plant only, if this is not belong to cassava plant. </h1> {% endcomment %}
+<h3>The model that predict has top accuracy of 88%. It helps in ealry diseases detection</h3>
+<div >
+  <img src='/media/train-cbb-1.jpg' alt='testimage' >
+  {% comment %} <img src=" {% static '{{ source }}' %}"  alternate="plant image" /> {% endcomment %}
+  <img src='{{source }}'  alternate="plant image" />
+
+  <h2>Scientific Name:  {{ content1 }} </h2>
+  <h2>Common Name:      {{ content2 }} </h2>
+  <p>'{{source }}' </p>
+
+  {% comment %} <img src=" {% static '/documents/train-cbb-1.jpg' %}" /> {% endcomment %}
+  
+
+
+</div>
 </div>
 
 {% endblock %}

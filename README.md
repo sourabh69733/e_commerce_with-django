@@ -16,5 +16,9 @@ It is simple e-commerce website.
 ### To run locally project
 clone project and please install all required above mention library.
 
-run `python manage.py runserver --settings=settings.base`
+run `python manage.py runserver `
 
+### Furthure Ideas for this project
+* First develop books page from movie lens data with all data we have.
+* Then, predict or do inferences from pre-build model (graph based probably)
+* It is enough for now, we will think about other after this.

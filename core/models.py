@@ -20,20 +20,11 @@ ADDRESS_CHOICES = (
     ("B", "Billing"),
     ("S", "Shipping")
 )
-BUILTY_CHOICES = (
-    ("M", "Manual"),
-    ("A", "Automatic")
-)
-
 
 class DocumentImage(models.Model):
-    image = models.FileField(upload_to="documents/")
+    image = models.FileField(upload_to="")
     uploaded_at = models.DateTimeField(auto_now_add=True)
 
-
-class FirstComponentModel(models.Model):
-    builty_type = models.CharField(choices=BUILTY_CHOICES, max_length=15)
-    manual_number = models.CharField(max_length=8)
 
 
 class Item(models.Model):

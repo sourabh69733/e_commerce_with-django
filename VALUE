@@ -1,0 +1,11 @@
+2021-05-31 19:06:28,338 11504 [INFO ] - Chocolatey v0.10.15
+2021-05-31 19:06:28,338 11504 [DEBUG] - Chocolatey is running on Windows v 10.0.19042.0
+2021-05-31 19:06:28,338 11504 [DEBUG] - Attempting to delete file "C:/ProgramData/chocolatey/choco.exe.old".
+2021-05-31 19:06:28,338 11504 [DEBUG] - Attempting to delete file "C:\ProgramData\chocolatey\choco.exe.old".
+2021-05-31 19:06:28,353 11504 [DEBUG] - Command line: "C:\ProgramData\chocolatey\choco.exe" --log-file=VALUE
+2021-05-31 19:06:28,353 11504 [DEBUG] - Received arguments: --log-file=VALUE
+2021-05-31 19:06:28,400 11504 [DEBUG] - RemovePendingPackagesTask is now ready and waiting for PreRunMessage.
+2021-05-31 19:06:28,400 11504 [DEBUG] - Sending message 'PreRunMessage' out if there are subscribers...
+2021-05-31 19:06:28,447 11504 [DEBUG] - [Pending] Removing all pending packages that should not be considered installed...
+2021-05-31 19:06:28,494 11504 [DEBUG] - Sending message 'PostRunMessage' out if there are subscribers...
+2021-05-31 19:06:28,494 11504 [DEBUG] - Exiting with 1

@@ -1,7 +1,7 @@
 from django.urls import path
 from .views import HomeView, CheckoutView, ItemDetailView, add_to_cart
 from .views import (remove_from_Cart, TestSite, about,
-                    OrderSummaryView, remove_single_item_from_cart, PaymentView, AddCoupon, RequestRefundView, FirstComponentForm, imageFile, predict_image
+                    OrderSummaryView, remove_single_item_from_cart, PaymentView, AddCoupon, RequestRefundView, imageFile, predict_image
                     )
 app_name = 'core'
 urlpatterns = [
@@ -20,8 +20,5 @@ urlpatterns = [
     path("payment/<payment_option>/", PaymentView.as_view(), name="payment"),
     path("add-coupon/", AddCoupon.as_view(), name="add-coupon"),
     path("request-refund/", RequestRefundView.as_view(), name="reuest-refund"),
-    path('appform/', FirstComponentForm.as_view(), name="appform "),
     path("predictions_for_image/", predict_image, name="predict_image"),
-
-
 ]

@@ -8,10 +8,9 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
 from django.views.generic import ListView, DetailView, View
 from django.utils import timezone
-from .models import Item, OrderItem, Order, Address, Payment, Coupon, Refund, FirstComponentModel
+from .models import Item, OrderItem, Order, Address, Payment, Coupon, Refund
 from .forms import CheckOutForm, CouponForm, RefundForm, ImageClassification
-from .address_form import FirstComponent
-from .casavara_diseases import get_image_files
+from .cassava_disease import get_image_files
 
 import os
 # Create your views here.
@@ -48,57 +47,20 @@ def imageFile(request):
 
 
 def predict_image(request):
-    directory = "media_root/documents"
-    files = os.listdir(directory)
-    img_path = os.path.join(directory,files[-1])
+    
+    image_directory = "media"
+    
+    files = os.listdir(image_directory)
+    # image_directory = ""
+
+    print(files, image_directory)
+    img_path = image_directory+"/"+ files[-1]
+    print(img_path)
     s,c= get_image_files()
-    return render(request, 'imagePredictions.html', {'source': img_path, 'content1': s,'content2':c})
+    context = {'source': img_path, 'content1': s, 'content2': c}
+    return render(request, 'imagePredictions.html', context)
 
 
-class FirstComponentForm(View):
-
-    def get(self, *args, **kwargs):
-        try:
-            tags = FirstComponentModel()
-            form = FirstComponent()
-            context = {
-                'form': form,
-                'buity_tag': False
-            }
-            form_model = FirstComponentModel.objects.filter(builty_type="M")
-            ts = FirstComponentModel.objects
-            print("hi", form_model, ts, form_model.exists())
-            if form_model.exists():
-                context.update({'builty_tag': True})
-            return render(self.request, 'appForms.html', context)
-        except ObjectDoesNotExist:
-            return redirect('core:appform')
-
-    def post(self, *args, **kwargs):
-        form = FirstComponent(self.request.POST or None)
-        try:
-            if form.is_valid():
-                builty_type = form.cleaned_data.get("builty_type")
-                manual_number = form.cleaned_data.get('manual_number')
-                form.save()
-                print(builty_type, manual_number)
-                return render(self.request, 'appForms.html', {'form': form})
-
-            else:
-                messages.info(
-                    self.request, "This Form is not valid,manual number must be 8 digits long")
-                return render(self.request, 'appForms.html', {'form': form})
-
-        except ObjectDoesNotExist:
-            return redirect('core:appform')
-
-
-def is_valid_form(values):
-    valid = True
-    for field in values:
-        if field == "":
-            valid = False
-    return valid
 
 
 class CheckoutView(View):
@@ -134,6 +96,13 @@ class CheckoutView(View):
         except ObjectDoesNotExist:
             return redirect('core:checkout')
 
+    def is_valid_form(self, arr):
+        if not arr:
+            return False
+        for i in arr:
+            if not i:
+                return False
+        return True
     def post(self, *args, **kwargs):
         form = CheckOutForm(self.request.POST or None)
         try:
@@ -164,7 +133,7 @@ class CheckoutView(View):
                     shipping_country = form.cleaned_data.get(
                         'shipping_country')
                     shipping_zip = form.cleaned_data.get('shipping_zip')
-                    if is_valid_form([shipping_address, shipping_zip, shipping_country]):
+                    if self.is_valid_form([shipping_address, shipping_zip, shipping_country]):
 
                         shipping_address = Address(
                             user=self.request.user,
@@ -219,7 +188,7 @@ class CheckoutView(View):
                         'billing_address2')
                     billing_country = form.cleaned_data.get('billing_country')
                     billing_zip = form.cleaned_data.get('billing_zip')
-                    if is_valid_form([billing_address, billing_zip, billing_country]):
+                    if self.is_valid_form([billing_address, billing_zip, billing_country]):
 
                         billing_address = Address(
                             user=self.request.user,
